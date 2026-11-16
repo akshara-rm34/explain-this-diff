@@ -32,12 +32,16 @@ describe("prepareDiff", () => {
     ]);
   });
 
-  it("drops source maps and declaration files but keeps normal .ts files", () => {
-    const out = prepareDiff(file("lib/app.js.map") + file("types/index.d.ts") + file("src/dts.ts"), 10_000);
-    expect(out.included).toEqual(["src/dts.ts"]);
+  it("drops source maps but keeps hand-written .d.ts files", () => {
+    const out = prepareDiff(
+      file("lib/app.js.map") + file("lib/index.d.ts.map") + file("types/global.d.ts") + file("dist/index.d.ts"),
+      10_000,
+    );
+    expect(out.included).toEqual(["types/global.d.ts"]);
     expect(out.skipped).toEqual([
       { path: "lib/app.js.map", reason: "source map" },
-      { path: "types/index.d.ts", reason: "generated types" },
+      { path: "lib/index.d.ts.map", reason: "source map" },
+      { path: "dist/index.d.ts", reason: "build output" },
     ]);
   });
 
