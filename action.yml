@@ -1,0 +1,38 @@
+name: Explain This Diff
+description: Asks 3 "why does this work" questions on each PR and saves your answers to an interview prep doc.
+branding:
+  icon: help-circle
+  color: purple
+
+inputs:
+  anthropic_api_key:
+    description: Anthropic API key. Store it as a repo secret.
+    required: true
+  github_token:
+    description: Token used to comment and commit the prep doc.
+    default: ${{ github.token }}
+  model:
+    description: Claude model ID.
+    default: claude-opus-5-5
+  effort:
+    description: Model effort (low, medium, high, xhigh, max). Lower is cheaper and faster.
+    default: high
+  doc_path:
+    description: Where the prep doc lives on the default branch.
+    default: docs/interview-prep.md
+  feedback:
+    description: Grade your answers and suggest stronger ones.
+    default: "true"
+  max_diff_chars:
+    description: Character budget for the diff sent to the model. Files over budget are listed as skipped.
+    default: "60000"
+  skip_drafts:
+    description: Don't ask questions on draft PRs.
+    default: "true"
+  bot_login:
+    description: Login of the account that posts the questions comment. Change it if you use a GitHub App token.
+    default: github-actions[bot]
+
+runs:
+  using: node24
+  main: dist/index.js

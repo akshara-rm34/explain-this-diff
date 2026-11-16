@@ -1,0 +1,27 @@
+name: Explain This Diff
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write        # commit the prep doc
+  pull-requests: write   # read the diff
+  issues: write          # post comments
+
+concurrency:
+  group: explain-this-diff-${{ github.event.pull_request.number || github.event.issue.number }}
+
+jobs:
+  explain:
+    # Skip ordinary comments early so they don't spin up a runner for nothing.
+    if: github.event_name == 'pull_request' || (github.event.issue.pull_request && startsWith(github.event.comment.body, '/answer'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Running from this repo. In another repo use: <your-username>/explain-this-diff@v1
+      - uses: ./
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
