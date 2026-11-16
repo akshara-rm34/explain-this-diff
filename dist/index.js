@@ -55803,6 +55803,7 @@ var NOISE_PATTERNS = [
   [/(^|\/)(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|bun\.lockb?|Cargo\.lock|poetry\.lock|go\.sum|Gemfile\.lock|composer\.lock)$/, "lockfile"],
   [/(^|\/)(dist|build|out|vendor|node_modules|\.next|coverage)\//, "build output"],
   [/\.min\.(js|css)$/, "minified"],
+  [/\.(js|css|d\.ts)\.map$/, "source map"],
   [/\.(png|jpe?g|gif|webp|ico|pdf|zip|gz|woff2?|ttf|mp4|mov)$/i, "binary"],
   [/\.snap$/, "snapshot"]
 ];
