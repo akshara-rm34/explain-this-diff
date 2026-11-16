@@ -24,7 +24,7 @@ if (!apiKey) {
 const questions = await generateQuestions(
   {
     apiKey,
-    model: process.env.MODEL ?? "claude-opus-5-5",
+    model: process.env.MODEL ?? "claude-haiku-5-5",
     effort: (process.env.EFFORT ?? "high") as Effort,
   },
   { title: process.env.TITLE ?? "(local diff)", body: "" },

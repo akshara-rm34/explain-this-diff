@@ -53,7 +53,7 @@ The prep doc is committed straight to the default branch. If that branch is prot
 
 | Input | Default | |
 |---|---|---|
-| `model` | `claude-opus-5-5` | Claude model ID |
+| `model` | `claude-haiku-5-5` | Claude model ID. `claude-opus-5-5` asks sharper questions at about 40x the cost |
 | `effort` | `high` | `low` / `medium` / `high` / `xhigh` / `max`. Lower is cheaper |
 | `doc_path` | `docs/interview-prep.md` | Where the prep doc goes |
 | `feedback` | `true` | Grade answers and suggest stronger ones |

@@ -30,7 +30,7 @@ function readConfig(): Config {
   return {
     llm: {
       apiKey: core.getInput("anthropic_api_key", { required: true }),
-      model: core.getInput("model") || "claude-opus-5-5",
+      model: core.getInput("model") || "claude-haiku-5-5",
       effort: (core.getInput("effort") || "high") as Effort,
     },
     docPath: core.getInput("doc_path") || "docs/interview-prep.md",

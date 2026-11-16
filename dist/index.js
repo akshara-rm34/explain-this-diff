@@ -75740,7 +75740,7 @@ function readConfig() {
   return {
     llm: {
       apiKey: getInput("anthropic_api_key", { required: true }),
-      model: getInput("model") || "claude-opus-5-5",
+      model: getInput("model") || "claude-haiku-5-5",
       effort: getInput("effort") || "high"
     },
     docPath: getInput("doc_path") || "docs/interview-prep.md",
