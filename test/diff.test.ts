@@ -32,6 +32,15 @@ describe("prepareDiff", () => {
     ]);
   });
 
+  it("drops source maps and declaration files but keeps normal .ts files", () => {
+    const out = prepareDiff(file("lib/app.js.map") + file("types/index.d.ts") + file("src/dts.ts"), 10_000);
+    expect(out.included).toEqual(["src/dts.ts"]);
+    expect(out.skipped).toEqual([
+      { path: "lib/app.js.map", reason: "source map" },
+      { path: "types/index.d.ts", reason: "generated types" },
+    ]);
+  });
+
   it("keeps the smallest files under the budget and reports the rest", () => {
     const small = file("small.ts");
     const big = file("big.ts", "+" + "y".repeat(500) + "\n");
